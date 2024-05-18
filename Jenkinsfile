@@ -2,6 +2,9 @@ pipeline{
 	agent {
 		label 'green'
 		}
+	environment{
+	JAVA_HOME = '/home/tom/project/jdk-11.0.21'
+		}	
 	stages{
 		stage("Checkout"){
 			steps{
