@@ -29,7 +29,9 @@ echo "DEPLOYED TO UAT"
 scp target/APPLE.war jerry@172.17.0.3:project/apache-tomcat-9.0.89/webapps\'
 elif [ $ENV = "PROD" ];then
 echo "DEPLOYED TO PROD"
-scp target/APPLE.war pratikkambl3@172.17.0.1:/home/pratikkambl3/Documents/Devops-Tools/apache-tomcat-9.0.89/webapps'''
+scp target/APPLE.war pratikkambl3@172.17.0.1:/home/pratikkambl3/Documents/Devops-Tools/apache-tomcat-9.0.89/webapps
+				fi'''
+				
 				}
 				   }	
 		stage("Notification"){
