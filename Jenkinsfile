@@ -4,7 +4,11 @@ pipeline{
 		}
 	environment{
 	JAVA_HOME = '/home/tom/project/jdk-11.0.21'
-		}	
+		}
+	parameters {
+  choice choices: ['QA', 'UAT', 'PROD'], name: 'ENV'
+}
+
 	stages{
 		stage("Checkout"){
 			steps{
@@ -17,7 +21,15 @@ pipeline{
 				}
 		stage("Deployment"){
 			steps{
-			sh 'scp target/APPLE.war jerry@172.17.0.3:project/apache-tomcat-9.0.89/webapps'
+			sh '''if [ $ENV = "QA" ];then
+echo "DEPLOYED TO QA"
+cp target/APPLE.war /home/tom/project/apache-tomcat-9.0.89/webapps
+elif [ $ENV = "UAT" ];then
+echo "DEPLOYED TO UAT"
+scp target/APPLE.war jerry@172.17.0.3:project/apache-tomcat-9.0.89/webapps\'
+elif [ $ENV = "PROD" ];then
+echo "DEPLOYED TO PROD"
+scp target/APPLE.war pratikkambl3@172.17.0.1:/home/pratikkambl3/Documents/Devops-Tools/apache-tomcat-9.0.89/webapps'''
 				}
 				   }	
 		stage("Notification"){
