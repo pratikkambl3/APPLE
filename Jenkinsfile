@@ -20,6 +20,11 @@ pipeline{
 			sh 'scp target/APPLE.war jerry@172.17.0.3:project/apache-tomcat-9.0.89/webapps'
 				}
 				   }	
+		stage("Notification"){
+			steps{
+				slackSend baseUrl: 'https://hooks.slack.com/services/', channel: '#apple', color: 'grren', message: 'Build is successfull', teamDomain: 'DEVOPS', tokenCredentialId: 'apple', username: 'siri'
+			}
+				}
 		}
 	}
 	
